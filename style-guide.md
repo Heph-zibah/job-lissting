@@ -13,14 +13,14 @@ The designs were created to the following widths:
 
 ### Primary
 
-- Desaturated Dark Cyan: hsl(180, 29%, 50%)
+- Desaturated Dark Cyan: hsl(180, 29%, 50%) #61A8A8
 
 ### Neutral
 
-- Light Grayish Cyan (Background): hsl(180, 52%, 96%)
-- Light Grayish Cyan (Filter Tablets): hsl(180, 31%, 95%)
-- Dark Grayish Cyan: hsl(180, 8%, 52%)
-- Very Dark Grayish Cyan: hsl(180, 14%, 20%)
+- Light Grayish Cyan (Background): hsl(180, 52%, 96%) FAEFEF
+- Light Grayish Cyan (Filter Tablets): hsl(180, 31%, 95%) EEF6F6
+- Dark Grayish Cyan: hsl(180, 8%, 52%) 8E7B7B
+- Very Dark Grayish Cyan: hsl(180, 14%, 20%) 3A2C2C
 
 ## Typography
 
