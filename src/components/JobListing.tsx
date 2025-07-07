@@ -1,28 +1,6 @@
-import type { JobListingItem } from "../lib/Type";
+import type { JobListingItem, JobListingProps } from "../lib/Type";
 
-interface Props {
-  filters: {
-    languages: string[];
-    tools: string[];
-    role: string;
-    level: string;
-  };
-  setFilters: React.Dispatch<
-    React.SetStateAction<{
-      languages: string[];
-      tools: string[];
-      role: string;
-      level: string;
-    }>
-  >;
-  filteredJobs: JobListingItem[];
-  handleFilterClick: (
-    type: "role" | "level" | "languages" | "tools",
-    value: string
-  ) => void;
-}
-
-const JobListing = ({ filteredJobs, handleFilterClick }: Props) => {
+const JobListing = ({ filteredJobs, handleFilterClick }: JobListingProps) => {
   return (
     <section className="px-5 max-w-4xl mx-auto mt-14">
       <div className="flex flex-col gap-14 md:gap-4">

@@ -25,8 +25,6 @@ const JobListings = () => {
             : [...prev[type], value],
         };
       }
-
-      // role or level (toggle string value)
       return {
         ...prev,
         [type]: prev[type] === value ? "" : value,

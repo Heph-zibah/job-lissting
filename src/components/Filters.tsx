@@ -1,24 +1,6 @@
-interface Props {
-  filters: {
-    languages: string[];
-    tools: string[];
-    role: string;
-    level: string;
-  };
-  setFilters: React.Dispatch<
-    React.SetStateAction<{
-      languages: string[];
-      tools: string[];
-      role: string;
-      level: string;
-    }>
-  >;
-}
+import type { FilterProps } from "../lib/Type";
 
-const Filters = ({
-  filters, setFilters
-} : Props) => {
-
+const Filters = ({ filters, setFilters }: FilterProps) => {
   return (
     <div className="">
       {(filters.languages.length > 0 ||
@@ -119,4 +101,4 @@ const Filters = ({
   );
 };
 
-export default Filters
+export default Filters;
