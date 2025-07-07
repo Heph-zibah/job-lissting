@@ -1,32 +1,32 @@
-import { useState } from "react";
-import data from "../data/data.json";
-import type{JobListingItem} from "../lib/Type"
+import type { JobListingItem } from "../lib/Type";
 
-const JobListing = () => {
-  const jobs: JobListingItem[] = data
-  const [selectLanguage, setSelectLanguage] = useState<string | null>(null);
-  const [selectTool, setSelectTool] = useState<string | null>(null);
+interface Props {
+  filters: {
+    languages: string[];
+    tools: string[];
+    role: string;
+    level: string;
+  };
+  setFilters: React.Dispatch<
+    React.SetStateAction<{
+      languages: string[];
+      tools: string[];
+      role: string;
+      level: string;
+    }>
+  >;
+  filteredJobs: JobListingItem[];
+  handleFilterClick: (
+    type: "role" | "level" | "languages" | "tools",
+    value: string
+  ) => void;
+}
 
-  const filteredJobs = jobs.filter((item) => {
-    const matchesLanguage = selectLanguage ? item.languages.includes(selectLanguage) : true;
-    const matchesTool = selectTool ? item.tools.includes(selectTool) : true
-
-    return matchesLanguage && matchesTool
-})
-
-  const handleFilterClick = (type :"language" | "tool", value: string) => {
-    if(type === "language"){
-      setSelectLanguage((prev) => (prev === value ? null : value));
-    } 
-    if (type === "tool") {
-      setSelectTool((prev) => (prev === value ? null : value));
-    } 
-
-  }
+const JobListing = ({ filteredJobs, handleFilterClick }: Props) => {
   return (
-    <section className="px-5 max-w-4xl mx-auto">
+    <section className="px-5 max-w-4xl mx-auto mt-14">
       <div className="flex flex-col gap-14 md:gap-4">
-        {filteredJobs.map((item) => (
+        {filteredJobs.map((item: JobListingItem) => (
           <div
             key={item.id}
             className="bg-white text-[15px] py-5 px-5 md:px-10 rounded-lg flex flex-col md:flex-row md:items-center justify-between md:gap-20 shadow-md hover:shadow-lg transition-shadow duration-300 relative"
@@ -36,7 +36,7 @@ const JobListing = () => {
             )}
             <div className="flex flex-col md:flex-row md:items-center gap-3 md:gap-5 pb-5 md:pb-0">
               <div className="-mt-16 md:-mt-0">
-                <img src={item.logo} alt="" />
+                <img src={item.logo} alt={`${item.company} logo`} />
               </div>
               <div className="space-y-1">
                 <div>
@@ -44,19 +44,15 @@ const JobListing = () => {
                     <p className="text-[#61A8A8] font-semibold">
                       {item.company}
                     </p>
-                    {item.new ? (
+                    {item.new && (
                       <span className="uppercase bg-[#61A8A8] text-white text-xs rounded-2xl font-medium px-2 pt-2 pb-1">
                         new!
                       </span>
-                    ) : (
-                      <span></span>
                     )}
-                    {item.featured ? (
+                    {item.featured && (
                       <span className="uppercase bg-[#3A2C2C] text-white text-xs rounded-2xl font-medium px-2 pt-2 pb-1">
                         featured
                       </span>
-                    ) : (
-                      <span></span>
                     )}
                   </div>
                   <div></div>
@@ -76,19 +72,31 @@ const JobListing = () => {
               </div>
             </div>
             <div className="flex items-center flex-wrap gap-3 border-t border-t-[#8E7B7B] md:border-t-0 pt-5 md:pt-0">
-              {item.languages.map((language, index) => (
+              <span
+                onClick={() => handleFilterClick("role", item.role)}
+                className="bg-[#EEF6F6] text-[#61A8A8] font-semibold py-1 px-2 rounded-sm cursor-pointer"
+              >
+                {item.role}
+              </span>
+              <span
+                onClick={() => handleFilterClick("level", item.level)}
+                className="bg-[#EEF6F6] text-[#61A8A8] font-semibold py-1 px-2 rounded-sm cursor-pointer"
+              >
+                {item.level}
+              </span>
+              {item.languages.map((language: string) => (
                 <span
-                  key={index}
-                  onClick={() => handleFilterClick("language", language)}
+                  key={`${item.id}-${language}`}
+                  onClick={() => handleFilterClick("languages", language)}
                   className="bg-[#EEF6F6] text-[#61A8A8] font-semibold py-1 px-2 rounded-sm cursor-pointer"
                 >
                   {language}
                 </span>
               ))}
-              {item.tools.map((tool, index) => (
+              {item.tools.map((tool: string) => (
                 <span
-                  key={index}
-                  onClick={() => handleFilterClick("tool", tool)}
+                  key={`${item.id}-${tool}`}
+                  onClick={() => handleFilterClick("tools", tool)}
                   className="bg-[#EEF6F6] text-[#61A8A8] font-semibold py-1 px-2 rounded-sm cursor-pointer"
                 >
                   {tool}
