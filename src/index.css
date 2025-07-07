@@ -6,7 +6,7 @@ body {
 }
 @layer base {
   body {
-    @apply bg-[#FAEFEF];
+    @apply bg-[#EEF6F6];
   
   }
 }

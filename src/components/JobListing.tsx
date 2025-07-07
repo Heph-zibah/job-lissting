@@ -24,20 +24,23 @@ const JobListing = () => {
 
   }
   return (
-    <section className="px-5 max-w-2xl mx-auto">
-      <div className="flex flex-col gap-4">
+    <section className="px-5 max-w-4xl mx-auto">
+      <div className="flex flex-col gap-14 md:gap-4">
         {filteredJobs.map((item) => (
           <div
             key={item.id}
-            className="bg-white text-[15px] py-3 px-2 rounded-lg flex flex-col md:flex-row items-center justify-between shadow-md hover:shadow-lg transition-shadow duration-300"
+            className="bg-white text-[15px] py-5 px-5 md:px-10 rounded-lg flex flex-col md:flex-row md:items-center justify-between md:gap-20 shadow-md hover:shadow-lg transition-shadow duration-300 relative"
           >
-            <div className="flex items-center gap-3">
-              <div>
+            {item.featured && (
+              <div className="w-2 h-full bg-[#61A8A8] absolute left-0 top-0 rounded-s-lg"></div>
+            )}
+            <div className="flex flex-col md:flex-row md:items-center gap-3 md:gap-5 pb-5 md:pb-0">
+              <div className="-mt-16 md:-mt-0">
                 <img src={item.logo} alt="" />
               </div>
-              <div>
+              <div className="space-y-1">
                 <div>
-                  <div className="flex items-center gap-2 ">
+                  <div className="flex items-center gap-3 ">
                     <p className="text-[#61A8A8] font-semibold">
                       {item.company}
                     </p>
@@ -72,7 +75,7 @@ const JobListing = () => {
                 </div>
               </div>
             </div>
-            <div className="flex gap-3">
+            <div className="flex items-center flex-wrap gap-3 border-t border-t-[#8E7B7B] md:border-t-0 pt-5 md:pt-0">
               {item.languages.map((language, index) => (
                 <span
                   key={index}
